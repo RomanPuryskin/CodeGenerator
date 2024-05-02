@@ -1,29 +1,24 @@
 #include <QCoreApplication>
-#include "unit.h"
-#include "classunit.h"
-#include "methodunit.h"
-#include "PrintOperatorUnit.h"
+#include "IGenerateCodeFactory.h"
 #include <iostream>
 
 std::string generateProgram() {
-    ClassUnit myClass( "MyClass" );
+    ClassUnitCpp myClass( "MyClass" );
     myClass.add(
-        std::make_shared< MethodUnit >( "testFunc1", "void", 0 ),
-        ClassUnit::PUBLIC
+        std::make_shared< MethodUnitCpp >( "testFunc1", "void", 0 ),
+        ClassUnitCpp::PUBLIC
         );
     myClass.add(
-        std::make_shared< MethodUnit >( "testFunc2", "void", MethodUnit::STATIC ),
-        ClassUnit::PRIVATE
+        std::make_shared< MethodUnitCpp >( "testFunc2", "void", MethodUnitCpp::STATIC ),
+        ClassUnitCpp::PRIVATE
         );
     myClass.add(
-        std::make_shared< MethodUnit >( "testFunc3", "void", MethodUnit::VIRTUAL |
-                                                              MethodUnit::CONST ),
-        ClassUnit::PUBLIC
+        std::make_shared< MethodUnitCpp >( "testFunc3", "void", MethodUnitCpp::VIRTUAL | MethodUnitCpp::CONST ),
+        ClassUnitCpp::PUBLIC
         );
-    auto method = std::make_shared< MethodUnit >( "testFunc4", "void",
-                                               MethodUnit::STATIC );
-    method->add( std::make_shared< PrintOperatorUnit >( R"(Hello, world!\n)" ) );//R для печати \n
-    myClass.add( method, ClassUnit::PROTECTED );
+    auto method = std::make_shared< MethodUnitCpp >( "testFunc4", "void", MethodUnitCpp::STATIC );
+    method->add( std::make_shared< PrintOperatorUnitCpp >( R"(Hello, world!\n)" ) );//R для печати \n
+    myClass.add( method, ClassUnitCpp::PROTECTED );
     return myClass.compile();
 }
 

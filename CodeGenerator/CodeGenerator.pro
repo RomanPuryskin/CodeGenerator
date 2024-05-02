@@ -7,9 +7,9 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        classunit.cpp \
+        classunitcpp.cpp \
         main.cpp \
-        methodunit.cpp
+        methodunitcpp.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -18,7 +18,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     IGenerateCodeFactory.h \
-    PrintOperatorUnit.h \
-    classunit.h \
-    methodunit.h \
+    PrintOperatorUnitCpp.h \
+    classunitcpp.h \
+    methodunitcpp.h \
     unit.h
