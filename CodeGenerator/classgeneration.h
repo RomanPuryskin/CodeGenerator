@@ -15,10 +15,13 @@ class ClassGeneration
 
 public:
     ClassGeneration( unsigned int classFlag);
-
-    std::string Program( unsigned int classFlag);
+    std::string generateProgramCpp( const std::shared_ptr< ICodeGenerator >& factory );
+    std::string generateProgramJava( const std::shared_ptr< ICodeGenerator >& factory );
+    std::string generateProgramSharp( const std::shared_ptr< ICodeGenerator >& factory );
+    std::string Program();
 
 private:
+    unsigned int m_flag;
     std::shared_ptr< ICodeGenerator > m_factory;
 };
 
