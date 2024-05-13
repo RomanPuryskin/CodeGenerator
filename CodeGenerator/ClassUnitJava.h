@@ -1,10 +1,11 @@
-#ifndef CLASSUNITCPP_H
-#define CLASSUNITCPP_H
+#ifndef CLASSUNITJAVA_H
+#define CLASSUNITJAVA_H
 #include "ClassUnit.h"
 
-class ClassUnitCpp : public ClassUnit {
+class ClassUnitJava : public ClassUnit
+{
 public:
-    ClassUnitCpp( const std::string& name ) : ClassUnit( name )
+    ClassUnitJava( const std::string& name ) : ClassUnit( name )
     {
         m_fields.resize( ACCESS_MODIFIERS.size() );
     }
@@ -15,6 +16,7 @@ public:
             m_fields[ flags ].push_back( unit );
     }
 
+public:
     std::string compile( unsigned int level = 0 ) const
     {
         std::string result = generateShift( level ) + "class " + m_name + " {\n";
@@ -23,19 +25,23 @@ public:
             if( m_fields[i].empty() )
                 continue;
 
-            result += ACCESS_MODIFIERS[i] + ":\n";
+            std::string temp = ACCESS_MODIFIERS[i];
 
             for( const auto& f : m_fields[i] )
-                result += f->compile( level + 1 );
+            {
+                result += generateShift( level + 1 ) + temp + " ";
+                result += f->compile( level );
+                result += "\n";
+            }
 
-            result += "\n";
         }
         result += generateShift( level ) + "};\n";
 
         return result;
+
     }
 private:
     const std::vector< std::string > ACCESS_MODIFIERS = { "public", "protected", "private" };
-
 };
-#endif // CLASSUNITCPP_H
+
+#endif // CLASSUNITJAVA_H

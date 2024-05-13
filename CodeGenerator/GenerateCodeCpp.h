@@ -12,8 +12,8 @@ public:
     }
 
     std::shared_ptr< MethodUnit > addMethod( const std::string& name,
-                                             const std::string& returnType,
-                                             Unit::Flags flags)
+                                          const std::string& returnType,
+                                          Unit::Flags flags)
     {
         return std::shared_ptr< MethodUnit >( new MethodUnitCpp( name, returnType, flags ) );
     }

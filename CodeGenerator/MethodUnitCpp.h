@@ -7,24 +7,23 @@ public:
     MethodUnitCpp( const std::string& name, const std::string& returnType, Flags flags ) :
         MethodUnit( name, returnType, flags ) { }
 
-    std::string compile( unsigned int level = 0 ) const {
+    std::string compile( unsigned int level = 0 ) const
+    {
         std::string result = generateShift( level );
-        if( getFlags() & STATIC ) {
+        if( m_flags & STATIC )
             result += "static ";
-        } else if( getFlags() & VIRTUAL ) {
+        else if( m_flags & VIRTUAL )
             result += "virtual ";
-        }
 
-        result += getReturnType() + " ";
-        result += getName() + "()";
+        result += m_returnType + " ";
+        result += m_name + "()";
 
-        if( getFlags() & CONST ) {
+        if( m_flags & CONST )
             result += " const";
-        }
 
         result += " {\n";
 
-        for( const auto& b : getBody() ) {
+        for( const auto& b : m_body ) {
             result += b->compile( level + 1 );
         }
 

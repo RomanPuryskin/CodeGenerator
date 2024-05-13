@@ -4,12 +4,8 @@
 
 class OperatorUnit : public Unit {
 public:
-    explicit OperatorUnit( const std::string& text ) : m_text( text ) { }
-
+    explicit OperatorUnit( const std::string& text ) : m_text( text ){ }
 protected:
-    const std::string& getText() const { return m_text; }
-
-private:
     std::string m_text;
 };
 #endif // OPERATORUNIT_H
