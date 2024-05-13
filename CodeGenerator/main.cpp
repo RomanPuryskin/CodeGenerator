@@ -1,28 +1,17 @@
 #include <QCoreApplication>
-#include "IGenerateCodeFactory.h"
 #include <iostream>
-
-std::string generateProgram() {
-    ClassUnitCpp myClass( "MyClass" );
-    myClass.add(
-        std::make_shared< MethodUnitCpp >( "testFunc1", "void", 0 ),
-        ClassUnitCpp::PUBLIC
-        );
-    myClass.add(
-        std::make_shared< MethodUnitCpp >( "testFunc2", "void", MethodUnitCpp::STATIC ),
-        ClassUnitCpp::PRIVATE
-        );
-    myClass.add(
-        std::make_shared< MethodUnitCpp >( "testFunc3", "void", MethodUnitCpp::VIRTUAL | MethodUnitCpp::CONST ),
-        ClassUnitCpp::PUBLIC
-        );
-    auto method = std::make_shared< MethodUnitCpp >( "testFunc4", "void", MethodUnitCpp::STATIC );
-    method->add( std::make_shared< PrintOperatorUnitCpp >( R"(Hello, world!\n)" ) );//R для печати \n
-    myClass.add( method, ClassUnitCpp::PROTECTED );
-    return myClass.compile();
+#include "GenerateCodeCpp.h"
+std::string generateProgram( const std::shared_ptr< ICodeGenerator >& factory ) {
+    auto myClass = factory->addClass( "MyClass" );
+    myClass->add( factory->addMethod( "testFunc1", "void", 0 ), ClassUnit::PUBLIC);
+    myClass->add( factory->addMethod( "testFunc2", "void", MethodUnit::STATIC ), ClassUnit::PRIVATE);
+    myClass->add( factory->addMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ), ClassUnit::PUBLIC);
+    std::shared_ptr< MethodUnit > method = factory->addMethod( "testFunc4", "void", MethodUnit::STATIC );
+    method->add( factory->addOperator( R"(Hello, world!\n)" ) );
+    myClass->add( method, ClassUnit::PROTECTED );
+    return myClass->compile();
 }
-
 int main() {
-    std::cout << generateProgram() << std::endl;
+    std::cout << generateProgram( std::make_shared< GenerateCodeCpp >() ) << std::endl;
     return 0;
 }
