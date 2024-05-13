@@ -9,8 +9,6 @@ public:
 
     std::string compile( unsigned int level = 0 ) const
     {
-        if(!(m_flags == 0 || m_flags & STATIC || m_flags & VIRTUAL || m_flags & CONST))
-            throw std::runtime_error( "Wrong modifier in ClassMethodCpp" );
         std::string result = generateShift( level );
         if( m_flags & STATIC )
             result += "static ";

@@ -9,6 +9,8 @@ public:
 
     std::string compile( unsigned int level = 0 ) const
     {
+        if(!(m_flags == 0 || m_flags & STATIC))
+            throw std::runtime_error( "Wrong modifier in ClassMethodSharp" );
         std::string result;
         if( m_flags & STATIC )
             result += "static ";

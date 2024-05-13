@@ -13,6 +13,8 @@ public:
     {
         if( flags < ACCESS_MODIFIERS.size() )
             m_fields[ flags ].push_back( unit );
+        else
+            throw std::runtime_error( "Wrong class modifier in ClassUnitSharp" );
     }
 
     std::string compile( unsigned int level = 0 ) const

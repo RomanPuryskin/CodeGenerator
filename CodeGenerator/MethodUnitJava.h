@@ -9,6 +9,8 @@ public:
 
     std::string compile( unsigned int level = 0 ) const
     {
+        if(!(m_flags == 0 || m_flags & STATIC || m_flags & FINAL || m_flags & ABSTRACT))
+            throw std::runtime_error( "Wrong modifier in ClassMethodJava" );
         std::string result;
         if( m_flags & STATIC )
             result += "static ";

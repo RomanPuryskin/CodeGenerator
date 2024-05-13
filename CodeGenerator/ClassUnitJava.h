@@ -12,8 +12,10 @@ public:
 
     void add( const std::shared_ptr< Unit >& unit, Flags flags )
     {
-        if( flags < ACCESS_MODIFIERS.size() )
+        if( flags < ACCESS_MODIFIERS.size() && flags < 3)
             m_fields[ flags ].push_back( unit );
+        else
+            throw std::runtime_error( "Wrong class modifier in ClassUnitJava" );
     }
 
 public:
