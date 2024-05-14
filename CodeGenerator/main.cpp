@@ -9,7 +9,6 @@ int main() {
                  "3 for C#\n" <<std::endl;
     unsigned int classControl;
     std::cin>>classControl;
-    //ClassGeneration *generate = new ClassGeneration(classControl);
     auto generate = std::make_shared<ClassGeneration>(classControl);
     std::cout<<generate->Program();
     return 0;
