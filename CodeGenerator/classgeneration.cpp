@@ -46,7 +46,7 @@ std::string ClassGeneration::generateProgramSharp( const std::shared_ptr< ICodeG
     myClass->add( m_factory->addMethod( "testFunc1", "void", 0 ), ClassUnit::PUBLIC);
     myClass->add( m_factory->addMethod( "testFunc2", "void", MethodUnit::STATIC ), ClassUnit::PRIVATE);
     myClass->add( m_factory->addMethod( "testFunc3", "void", MethodUnit::STATIC), ClassUnit::PRIVATE_PROTECTED);
-    std::shared_ptr< MethodUnit > method = m_factory->addMethod( "testFunc4", "void", MethodUnit::FINAL );
+    std::shared_ptr< MethodUnit > method = m_factory->addMethod( "testFunc4", "void", MethodUnit::STATIC );
     method->add( m_factory->addOperator( R"(Hello, world!\n)" ) );
     myClass->add( method, ClassUnit::PROTECTED );
     myClass->add( m_factory->addMethod( "testFunc5", "void", 0), ClassUnit::INTERNAL);

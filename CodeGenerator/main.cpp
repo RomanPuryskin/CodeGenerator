@@ -8,8 +8,11 @@ int main() {
                  "2 for Java\n"
                  "3 for C#\n" <<std::endl;
     unsigned int classControl;
-    std::cin>>classControl;
-    auto generate = std::make_shared<ClassGeneration>(classControl);
-    std::cout<<generate->Program();
+    while(true)
+    {
+        std::cin>>classControl;
+        auto generate = std::make_shared<ClassGeneration>(classControl);
+        std::cout<<generate->Program();
+    }
     return 0;
 }
